@@ -1,0 +1,78 @@
+<div class="buttons">
+  <button class="button-9" role="button" (click)="setCategory(0)">All</button>
+  <button class="button-9" role="button" (click)="setCategory(1)">Gaming</button>
+  <button class="button-9" role="button" (click)="setCategory(2)">Toys</button>
+  <button class="button-9" role="button" (click)="setCategory(3)">Books</button>
+  <button class="button-9" role="button" (click)="setCategory(4)">Music</button>
+</div>
+
+<h2>Products</h2>
+
+<div *ngFor="let product of products">
+  <div *ngIf="currentCategory == 0 && product.visibility">
+    <img class="image" [src]="product.image"/>
+
+    <h3>
+      <a [title]="product.name + ' details'"
+      [routerLink]="['/products', product.id]">
+        {{ product.name }}
+      </a>
+    </h3>
+
+    <p *ngIf="product.description">
+      Description: {{ product.description }}
+    </p>
+
+    <h4 *ngIf="product.rating != ''">{{ product.rating }} out of 5</h4>
+
+    <button class="button-1" type="button" (click)="share(product.id)">
+      Share
+    </button>
+
+    <button class="button-1 button-2" type="button" (click)="onDelete(product.id)">
+      Delete
+    </button><br>
+
+    <button (click)="onLike(product.id)">
+      Like {{ product.likes }}
+    </button>
+
+    <app-product-alerts
+      [product]="product" 
+      (notify)="onNotify()">
+    </app-product-alerts>
+  </div>
+
+  <div *ngIf="currentCategory == product.category && product.visibility">
+    <img class="image" [src]="product.image"/>
+
+    <h3>
+      <a [title]="product.name + ' details'"
+      [routerLink]="['/products', product.id]">
+        {{ product.name }}
+      </a>
+    </h3>
+
+    <p *ngIf="product.description">
+      Description: {{ product.description }}
+    </p>
+
+    <h4 *ngIf="product.rating != ''">{{ product.rating }} out of 5</h4>
+
+    <button class="button-1" type="button" (click)="share(product.id)">
+      Share
+    </button>
+
+    <button class="button-1 button-2" type="button" (click)="onDelete(product.id)">
+      Delete
+    </button>
+
+    <p>{{ product.likes }}</p>
+
+    <app-product-alerts
+      [product]="product" 
+      (notify)="onNotify()">
+    </app-product-alerts>
+  </div>
+
+</div>

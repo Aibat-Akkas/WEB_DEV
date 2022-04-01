@@ -1,0 +1,9 @@
+<p *ngIf="!loaded">Loading post...</p>
+<div *ngIf="loaded">
+    <h2>Photos Of Album #{{albumId}}</h2>
+    <button (click)="goBack()">Go Back</button>
+    <div *ngFor="let image of images">
+        <img src="{{image.url}}" alt="Image">
+        <img src="{{image.thumbnailUrl}}" alt="Image">
+    </div>
+</div>
